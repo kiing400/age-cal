@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Age Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Age Calculator</h1>
+  <div class="input-field">
+    <label for="birthdate">skrive bursdagen din her:</label>
+    <input type="date" id="birthdate">
+    <button onclick="calculateAge()">Calculate Age</button>
+  </div>
+
+  <div class="clock">
+    <div>
+      <span id="dayText">DAG</span>
+      <span class="age" id="days">00</span>
+    </div>
+    <div>
+      <span id="monthText">MÅNED</span>
+      <span class="age" id="months">00</span>
+    </div>
+    <div>
+      <span id="yearText">ÅR</span>
+      <span class="age" id="years">00</span>
+    </div>
+  </div>
+
+  <script>
+    function calculateAge() {
+      const birthDate = new Date(document.getElementById('birthdate').value);
+      const today = new Date();
+
+      let years = today.getFullYear() - birthDate.getFullYear();
+      let months = today.getMonth() - birthDate.getMonth();
+      let days = today.getDate() - birthDate.getDate();
+
+      if (days < 0) {
+        months--;
+        days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+      }
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      document.getElementById('days').innerText = days;
+      document.getElementById('months').innerText = months;
+      document.getElementById('years').innerText = years;
+    }
+  </script>
+</body>
+</html>
